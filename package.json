@@ -1,14 +1,17 @@
 {
   "dependencies": {
     "@tailwindcss/cli": "^4.1.4",
+    "alpinejs": "^3.14.9",
     "nanoid": "^5.1.5",
     "tailwindcss": "^4.1.4",
     "ulid": "^3.0.0",
     "uuid": "^11.1.0"
   },
   "scripts": {
-    "build": "esbuild public/input.js --bundle --outfile=public/output.js --minify",
-    "watch": "esbuild --watch public/input.js --bundle --outfile=public/output.js"
+    "build-js": "esbuild public/input.js --bundle --outfile=public/output.js --minify",
+    "watch-js": "esbuild --watch public/input.js --bundle --outfile=public/output.js",
+    "build-css": "tailwindcss -i ./public/input.css -o ./public/output.css --minify",
+    "watch-css": "tailwindcss -i ./public/input.css -o ./public/output.css --watch"
   },
   "devDependencies": {
     "esbuild": "0.25.2"

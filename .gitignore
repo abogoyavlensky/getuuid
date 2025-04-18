@@ -1,5 +1,3 @@
 .idea/
 .DS_Store
 node_modules/
-public/output.js
-public/output.css

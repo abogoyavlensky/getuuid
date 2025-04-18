@@ -1,7 +1,9 @@
 import * as uuid from 'uuid';
 import { ulid } from "ulid";
 import { nanoid } from 'nanoid'
+import Alpine from 'alpinejs'
 
+window.Alpine = Alpine
 
 export default function uuidGenerator() {
   return {
@@ -29,7 +31,7 @@ export default function uuidGenerator() {
       
       generateUuid() {
           let newUuid = '';
-          
+
           try { 
               switch(this.selectedType) {
                   case 'v1':
@@ -133,3 +135,5 @@ export default function uuidGenerator() {
 
 // Make it accessible outside this file
 window.uuidGenerator = uuidGenerator;
+
+Alpine.start()
