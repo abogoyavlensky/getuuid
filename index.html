@@ -25,6 +25,9 @@
             transform: translate(-1px, -1px);
             box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.8);
         }
+        button {
+            cursor: pointer;
+        }
         .uuid-type-btn.active {
             background-color: #ff6b6b;
             color: white;
@@ -38,7 +41,7 @@
     <div x-data="uuidGenerator" class="container mx-auto px-4 py-8 max-w-3xl">
         <header class="flex justify-between items-center mb-8">
             <h1 class="text-3xl font-bold">Get<span class="text-primary">UUID</span></h1>
-            <button @click="showAbout = !showAbout" class="neo-brutal-sm px-4 py-2 bg-white hover:bg-gray-100">About</button>
+            <button @click="showAbout = !showAbout" class="neo-brutal-sm px-4 py-2 bg-white hover:bg-gray-100 cursor-pointer">About</button>
         </header>
         
         <!-- About Modal -->
@@ -51,7 +54,7 @@
                 <p class="mb-4">A minimalistic tool for generating different types of UUIDs and ULIDs. All generated IDs are stored in your browser's localStorage.</p>
                 <p class="mb-4">This tool supports UUID v1, v4, v7, ULID and Nano ID formats. History is limited by 50 entries.</p>
                 <p class="mb-4">Source code: <a target="_blank" href="https://github.com/abogoyavlensky/getuuid" class="text-primary font-medium hover:text-primary/80 underline underline-offset-2 transition-colors">abogoyavlensky/getuuid</a></p>
-                <button @click="showAbout = false" class="neo-brutal-sm px-4 py-2 bg-primary text-white hover:bg-opacity-90 mt-4">Close</button>
+                <button @click="showAbout = false" class="neo-brutal-sm px-4 py-2 bg-primary text-white hover:bg-opacity-90 mt-4 cursor-pointer">Close</button>
             </div>
         </div>
         
@@ -78,7 +81,7 @@
                     <button 
                         @click="selectType(type.id)" 
                         :class="{'active': selectedType === type.id}" 
-                        class="uuid-type-btn neo-brutal-sm px-3 py-1 bg-white hover:bg-gray-100">
+                        class="uuid-type-btn neo-brutal-sm px-3 py-1 bg-white hover:bg-gray-100 cursor-pointer">
                         <span x-text="type.label"></span>
                     </button>
                 </template>
@@ -94,14 +97,14 @@
         <div class="neo-brutal bg-white p-6">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-bold">History</h2>
-                <button @click="clearHistory()" class="neo-brutal-sm px-4 py-2 bg-secondary hover:bg-gray-100">Clear</button>
+                <button @click="clearHistory()" class="neo-brutal-sm px-4 py-2 bg-secondary hover:bg-gray-100 cursor-pointer">Clear</button>
             </div>
             
             <div class="space-y-3 max-h-60 overflow-y-auto">
                 <template x-for="(item, index) in history" :key="index">
                     <div class="flex items-center justify-between p-2 bg-gray-50 rounded-md">
                         <div class="flex items-center space-x-3">
-                            <button @click="copyToClipboard(item.uuid, 'history-' + index)" class="neo-brutal-sm p-1 bg-white hover:bg-gray-100" title="Copy to clipboard">
+                            <button @click="copyToClipboard(item.uuid, 'history-' + index)" class="neo-brutal-sm p-1 bg-white hover:bg-gray-100 cursor-pointer" title="Copy to clipboard">
                                 <svg x-show="!isButtonCopied('history-' + index) && !isButtonCopied('history-text-' + index)" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                                 </svg>
@@ -112,7 +115,7 @@
                             <span 
                                 @click="copyToClipboard(item.uuid, 'history-text-' + index)" 
                                 class="font-mono text-sm truncate max-w-xs cursor-pointer hover:bg-gray-200 px-2 py-1 rounded transition-colors"
-                                title="Click to copy" 
+                                title="Click to copy"
                                 x-text="item.uuid"></span>
                         </div>
                         <span class="text-xs bg-gray-200 px-2 py-1 rounded" x-text="item.type"></span>
