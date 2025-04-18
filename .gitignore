@@ -1,5 +1,4 @@
-# IDE specific files
 .idea/
-
-# OS specific files
 .DS_Store
+node_modules/
+public/output.js

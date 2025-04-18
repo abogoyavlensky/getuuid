@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "uuid": "^11.1.0"
+  },
+  "scripts": {
+    "build": "esbuild public/input.js --bundle --outfile=public/output.js --minify",
+    "watch": "esbuild --watch public/input.js --bundle --outfile=public/output.js"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.2"
+  }
+}
