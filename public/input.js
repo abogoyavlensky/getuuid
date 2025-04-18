@@ -1,4 +1,6 @@
 import * as uuid from 'uuid';
+import { ulid } from "ulid";
+import { nanoid } from 'nanoid'
 
 
 export default function uuidGenerator() {
@@ -12,7 +14,8 @@ export default function uuidGenerator() {
           { id: 'v4', label: 'UUID v4' },
           { id: 'v7', label: 'UUID v7' },
           { id: 'v1', label: 'UUID v1' },
-          { id: 'ulid', label: 'ULID' }
+          { id: 'ulid', label: 'ULID' },
+          { id: 'nanoid', label: 'Nano ID' }
       ],
       
       init() {
@@ -21,19 +24,12 @@ export default function uuidGenerator() {
           if (savedHistory) {
               this.history = JSON.parse(savedHistory);
           }
-          // Check libs *again* just before generation
-          // if (typeof window.uuid !== 'undefined' && typeof window.ulid !== 'undefined') {
-               this.generateUuid(); // Generate initial UUID here now
-          // } else {
-              //  this.currentUuid = "Error: Libraries not ready.";
-              //  console.error("Libraries not ready during init.");
-          // }
+          this.generateUuid(); // Generate initial UUID here now
       },
       
       generateUuid() {
-          console.log("Generating UUID..."); // Log the function cal
           let newUuid = '';
-
+          
           try { 
               switch(this.selectedType) {
                   case 'v1':
@@ -46,8 +42,10 @@ export default function uuidGenerator() {
                       newUuid = uuid.v7();
                       break;
                   case 'ulid':
-                      // The UMD build typically exposes the function directly
-                      newUuid = window.ulid(); 
+                      newUuid = ulid(); 
+                      break;
+                  case 'nanoid':
+                      newUuid = nanoid();
                       break;
                   default:
                       newUuid = uuid.v4();
@@ -80,6 +78,8 @@ export default function uuidGenerator() {
                   return 'Time-ordered UUID with improved sortability while maintaining randomness.';
               case 'ulid':
                   return 'Universally Unique Lexicographically Sortable Identifier. Time-based and sortable.';
+              case 'nanoid':
+                  return 'A tiny, URL-friendly, unique string ID generator for JavaScript.';
               default:
                   return 'Random UUID, the most common format. Provides strong uniqueness guarantees.';
           }
