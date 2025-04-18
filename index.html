@@ -58,15 +58,19 @@
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
-    <div x-data="uuidGenerator" class="container mx-auto px-4 py-8 max-w-3xl">
-        <header class="flex justify-between items-center mb-8">
-            <h1 class="text-3xl font-bold">Get<span class="text-primary">UUID</span></h1>
+    <div x-data="uuidGenerator" class="container mx-auto px-4 py-8 max-w-3xl flex flex-col min-h-screen">
+        <header class="flex justify-between items-center mb-6">
+            <h1 class="text-5xl font-bold">Get<span class="text-primary">UUID</span></h1>
             <button @click="showAbout = !showAbout" class="neo-brutal-sm px-4 py-2 bg-white hover:bg-gray-100 cursor-pointer">About</button>
         </header>
-        
+
+        <div class="text-center mb-10">
+            <h2 class="text-2xl text-gray-700">Effortless UUID, ULID & NanoID generation</h2>
+        </div>
+
         <!-- About Modal -->
-        <div x-cloak x-show="showAbout" 
-          class="fixed inset-0 flex items-center justify-center z-50 bg-black/50 backdrop-blur-xs bg-opacity-50" 
+        <div x-cloak x-show="showAbout"
+          class="fixed inset-0 flex items-center justify-center z-50 bg-black/50 backdrop-blur-xs bg-opacity-50"
           @keydown.escape.window="showAbout = false"
           @click="showAbout = false">
             <div class="neo-brutal bg-white p-6 max-w-md mx-auto" @click.stop>
@@ -77,9 +81,9 @@
                 <button @click="showAbout = false" class="neo-brutal-sm px-4 py-2 bg-primary text-white hover:bg-opacity-90 mt-4 cursor-pointer">Close</button>
             </div>
         </div>
-        
+
         <!-- Main UUID Generator -->
-        <div class="neo-brutal bg-white p-6 mb-8">
+        <div class="neo-brutal bg-white p-6 mb-6">
             <div class="flex items-center justify-center space-x-4 mb-6">
                 <button @click="copyToClipboard(currentUuid, 'main')" class="neo-brutal-sm p-2 bg-white hover:bg-gray-100" title="Copy to clipboard">
                     <svg x-show="!copied && !isButtonCopied('main')" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -94,33 +98,33 @@
                 </div>
                 <button @click="generateUuid" class="neo-brutal-sm px-4 py-2 bg-primary text-white hover:bg-opacity-90">Generate</button>
             </div>
-            
+
             <!-- UUID Type Selection -->
             <div class="flex flex-wrap justify-center gap-2 mb-6">
                 <template x-for="type in uuidTypes" :key="type.id">
-                    <button 
-                        @click="selectType(type.id)" 
-                        :class="{'active': selectedType === type.id}" 
+                    <button
+                        @click="selectType(type.id)"
+                        :class="{'active': selectedType === type.id}"
                         class="uuid-type-btn neo-brutal-sm px-3 py-1 bg-white hover:bg-gray-100 cursor-pointer">
                         <span x-text="type.label"></span>
                     </button>
                 </template>
             </div>
-            
+
             <!-- UUID Description -->
             <div class="text-center text-gray-700 text-sm">
                 <p x-text="getTypeDescription()"></p>
             </div>
         </div>
-        
+
         <!-- History Section -->
-        <div class="neo-brutal bg-white p-6">
+        <div class="neo-brutal bg-white p-6 flex-grow flex flex-col">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-bold">History</h2>
                 <button @click="clearHistory()" class="neo-brutal-sm px-4 py-2 bg-secondary cursor-pointer">Clear</button>
             </div>
-            
-            <div class="space-y-3 max-h-96 overflow-y-auto">
+
+            <div class="space-y-3 overflow-y-auto flex-grow">
                 <template x-for="(item, index) in history" :key="index">
                     <div class="flex items-center justify-between p-2 bg-gray-50 rounded-md">
                         <div class="flex items-center space-x-3">
@@ -146,6 +150,7 @@
                 </div>
             </div>
         </div>
+                    <div class="py-2"></div> <!-- Bottom padding -->
     </div>
     <script src="public/output.js?v=1"></script>
     <script>
