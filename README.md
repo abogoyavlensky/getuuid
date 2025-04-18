@@ -1,0 +1,97 @@
+# GetUUID
+
+<p align="center">
+  <img src="public/favicon.svg" alt="GetUUID Logo" width="100" height="100">
+</p>
+
+A minimalist web tool for generating various unique identifiers with a modern neo-brutalist UI design.
+
+## Features
+
+- **Multiple ID Types**: Generate various unique identifiers:
+  - UUID v1 (Time-based UUID that includes the MAC address)
+  - UUID v4 (Random UUID with strong uniqueness guarantees)
+  - UUID v7 (Time-ordered UUID with improved sortability)
+  - ULID (Universally Unique Lexicographically Sortable Identifier)
+  - Nano ID (URL-friendly unique string ID generator)
+
+- **Local History**: Automatically saves your generated IDs in browser's localStorage
+  - Keeps track of your last 50 generated IDs
+  - Easily clear history with a single click
+
+- **User-Friendly Features**:
+  - One-click copying to clipboard
+  - Visual feedback when IDs are copied
+  - Responsive design works on desktop and mobile
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or later recommended)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/abogoyavlensky/getuuid.git
+   cd getuuid
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+3. Build the project:
+   ```
+   npm run build-css
+   npm run build-js
+   ```
+
+4. Open `index.html` in your browser
+
+### Development
+
+- Watch for JS changes:
+  ```
+  npm run watch-js
+  ```
+
+- Watch for CSS changes:
+  ```
+  npm run watch-css
+  ```
+
+## Technology Stack
+
+- [Alpine.js](https://alpinejs.dev/) - Lightweight JavaScript framework
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [UUID](https://github.com/uuidjs/uuid) - RFC-compliant UUID generation
+- [ULID](https://github.com/ulid/javascript) - Implementation of the ULID spec
+- [Nano ID](https://github.com/ai/nanoid) - Tiny, URL-friendly unique string ID generator
+
+## Browser Support
+
+- Chrome, Firefox, Safari, Edge (latest versions)
+- Works offline once loaded
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contributing
+
+Contributions are welcome! Feel free to open an issue or submit a pull request.
+
+1. Fork the repository
+2. Create your feature branch: `git checkout -b feature/my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin feature/my-new-feature`
+5. Submit a pull request
+
+## Acknowledgments
+
+- Inspired by the need for a simple, fast UUID generator for developers
+- Neo-brutalist design inspiration from modern web design trends
