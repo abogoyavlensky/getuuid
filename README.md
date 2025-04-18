@@ -4,7 +4,7 @@
   <img src="public/favicon.svg" alt="GetUUID Logo" width="100" height="100">
 </p>
 
-A minimalist web tool for generating various unique identifiers with a modern neo-brutalist UI design.
+A minimalist web tool for generating various unique identifiers with history tracking and modern, user-friendly design.
 
 ![Landing](/docs/landing.png)
 
