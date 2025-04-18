@@ -5,27 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GetUUID</title>
     <link rel="icon" href="public/favicon.svg">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        // Configure Tailwind for neobrutalism style
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#ff6b6b',
-                        secondary: '#4ecdc4',
-                        dark: '#292f36',
-                        light: '#f7fff7'
-                    },
-                    boxShadow: {
-                        'brutal': '4px 4px 0px 0px rgba(0, 0, 0, 0.8)',
-                        'brutal-sm': '2px 2px 0px 0px rgba(0, 0, 0, 0.8)'
-                    }
-                }
-            }
-        }
-    </script>
-    
+    <link href="public/output.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -49,6 +29,9 @@
             background-color: #ff6b6b;
             color: white;
         }
+        [x-cloak] {
+          display: none !important;
+        }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
@@ -59,8 +42,8 @@
         </header>
         
         <!-- About Modal -->
-        <div x-show="showAbout" 
-          class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50" 
+        <div x-cloak x-show="showAbout" 
+          class="fixed inset-0 flex items-center justify-center z-50 bg-black/50 backdrop-blur-xs bg-opacity-50" 
           @keydown.escape.window="showAbout = false"
           @click="showAbout = false">
             <div class="neo-brutal bg-white p-6 max-w-md mx-auto" @click.stop>
@@ -111,7 +94,7 @@
         <div class="neo-brutal bg-white p-6">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-bold">History</h2>
-                <button @click="clearHistory()" class="neo-brutal-sm px-4 py-2 bg-white hover:bg-gray-100">Clear</button>
+                <button @click="clearHistory()" class="neo-brutal-sm px-4 py-2 bg-secondary hover:bg-gray-100">Clear</button>
             </div>
             
             <div class="space-y-3 max-h-60 overflow-y-auto">

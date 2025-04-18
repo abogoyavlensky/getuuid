@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@tailwindcss/cli": "^3.1.4",
+    "@tailwindcss/cli": "^4.1.4",
     "nanoid": "^5.1.5",
     "tailwindcss": "^4.1.4",
     "ulid": "^3.0.0",
