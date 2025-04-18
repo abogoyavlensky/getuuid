@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GetUUID</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="public/output.js"></script>
-
-    <!-- AlpineJS CDN (defer removed, will initialize manually later) -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
     <script>
         // Configure Tailwind for neobrutalism style
         tailwind.config = {
@@ -58,7 +53,7 @@
 <body class="bg-gray-50 min-h-screen">
     <div x-data="uuidGenerator" class="container mx-auto px-4 py-8 max-w-3xl">
         <header class="flex justify-between items-center mb-8">
-            <h1 class="text-3xl font-bold">GetUUID</h1>
+            <h1 class="text-3xl font-bold">Get<span class="text-primary">UUID</span></h1>
             <button @click="showAbout = !showAbout" class="neo-brutal-sm px-4 py-2 bg-white hover:bg-gray-100">About</button>
         </header>
         
@@ -138,23 +133,7 @@
             </div>
         </div>
     </div>
-    <!-- Alpine Initialization -->
-    <!-- <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.addEventListener('alpine:init', () => {
-            // Check if libraries are loaded before defining component
-            if (typeof window.uuid !== 'undefined' && typeof window.ulid !== 'undefined') {
-                Alpine.data('uuidGenerator', uuidGenerator); // Register component using the function defined earlier
-            } else {
-                console.error("Failed to initialize Alpine component: UUID or ULID library not loaded.");
-                // Optionally display an error message to the user on the page
-                // Find a way to update the UI safely if Alpine didn't initialize the component
-                const uuidDisplay = document.querySelector('[x-data="uuidGenerator"] span[x-text="currentUuid"]');
-                if (uuidDisplay) {
-                    uuidDisplay.textContent = 'Error: Required libraries failed to load.';
-                }
-            }});
-        });
-    </script> -->
+    <script src="public/output.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 </html>
