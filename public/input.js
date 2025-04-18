@@ -85,13 +85,30 @@ export default function uuidGenerator() {
           }
       },
       
-      copyToClipboard(text) {
+      copiedItems: {},
+      
+      copyToClipboard(text, buttonId = 'main') {
           navigator.clipboard.writeText(text).then(() => {
-              this.copied = true;
+              // Set copied state for specific button
+              this.copiedItems[buttonId] = true;
+              
+              // For backward compatibility with the main button
+              if (buttonId === 'main') {
+                  this.copied = true;
+              }
+              
               setTimeout(() => {
-                  this.copied = false;
+                  this.copiedItems[buttonId] = false;
+                  
+                  if (buttonId === 'main') {
+                      this.copied = false;
+                  }
               }, 2000);
           });
+      },
+      
+      isButtonCopied(buttonId) {
+          return this.copiedItems[buttonId] === true;
       },
       
       addToHistory(uuid, type) {

@@ -58,15 +58,15 @@
         <!-- Main UUID Generator -->
         <div class="neo-brutal bg-white p-6 mb-8">
             <div class="flex items-center justify-center space-x-4 mb-6">
-                <button @click="copyToClipboard(currentUuid)" class="neo-brutal-sm p-2 bg-white hover:bg-gray-100" title="Copy to clipboard">
-                    <svg x-show="!copied" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <button @click="copyToClipboard(currentUuid, 'main')" class="neo-brutal-sm p-2 bg-white hover:bg-gray-100" title="Copy to clipboard">
+                    <svg x-show="!copied && !isButtonCopied('main')" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                     </svg>
-                    <svg x-show="copied" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg x-show="copied || isButtonCopied('main')" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
                 </button>
-                <div @click="copyToClipboard(currentUuid)" class="font-mono text-lg md:text-xl bg-gray-100 p-3 rounded-md cursor-pointer overflow-x-auto whitespace-nowrap max-w-full" title="Click to copy">
+                <div @click="copyToClipboard(currentUuid, 'main')" class="font-mono text-lg md:text-xl bg-gray-100 p-3 rounded-md cursor-pointer overflow-x-auto whitespace-nowrap max-w-full" title="Click to copy">
                     <span x-text="currentUuid"></span>
                 </div>
                 <button @click="generateUuid" class="neo-brutal-sm px-4 py-2 bg-primary text-white hover:bg-opacity-90">Generate</button>
@@ -101,9 +101,12 @@
                 <template x-for="(item, index) in history" :key="index">
                     <div class="flex items-center justify-between p-2 bg-gray-50 rounded-md">
                         <div class="flex items-center space-x-3">
-                            <button @click="copyToClipboard(item.uuid)" class="neo-brutal-sm p-1 bg-white hover:bg-gray-100" title="Copy to clipboard">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <button @click="copyToClipboard(item.uuid, 'history-' + index)" class="neo-brutal-sm p-1 bg-white hover:bg-gray-100" title="Copy to clipboard">
+                                <svg x-show="!isButtonCopied('history-' + index)" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                </svg>
+                                <svg x-show="isButtonCopied('history-' + index)" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
                             </button>
                             <span class="font-mono text-sm truncate max-w-xs" x-text="item.uuid"></span>
