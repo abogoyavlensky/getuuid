@@ -7,18 +7,35 @@
     <!-- TailwindCSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- UUID Library -->
-    <script src="https://cdn.jsdelivr.net/npm/uuid@11.1.0/dist/cjs-browser/index.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/node-uuid@1.4.8/uuid.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/uuid@11.1.0/dist/cjs-browser/index.min.js"></script> -->
+
+
+    <!-- TODO: remove! -->
     <!-- ULID Library -->
-    <script src="https://cdn.jsdelivr.net/npm/ulid@2.3.0/dist/index.umd.js"></script>
-    
+    <!-- <script src="https://cdn.jsdelivr.net/npm/ulid@2.3.0/dist/index.umd.js"></script> -->
+    <!--  -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/uuid@9.0.1/dist/umd/uuid.min.js"></script> -->
+    <!-- <script type="module">
+       import { v4 as uuidv4, v1 as uuidv1, v7 as uuidv7 } from 'https://cdn.jsdelivr.net/npm/uuid@11.1.0/dist/esm-browser/index.js';
+       import { ulid } from 'https://cdn.jsdelivr.net/npm/ulid@3.0.0/+esm'
+
+       window.uuidv4 = uuidv4;
+       window.uuidv1 = uuidv1;
+       window.uuidv7 = uuidv7;
+       window.ulid = ulid;
+
+        // console.log(uuidv4());
+        // console.log(ulid());
+    </script> -->
+
     <!-- Alpine Component Definition (moved here, but will be registered later) -->
-    <script type="module">
-      import { v4 as uuidv4, v1 as uuidv1, v7 as uuidv7 } from 'https://cdn.jsdelivr.net/npm/uuid@11.1.0/dist/esm-browser/index.js';
-      import { ulid } from 'https://cdn.jsdelivr.net/npm/ulid@3.0.0/+esm'
-    </script> 
     <script>
-            console.log(uuidv4());
-            console.log(ulid());
+      console.log(uuid.v4());
+      console.log(uuid.v1());
+      console.log(uuid.v7());
+      // console.log(ulid());
 
         function uuidGenerator() {
             return {
@@ -53,30 +70,23 @@
                     console.log("Generating UUID..."); // Log the function cal
                     let newUuid = '';
 
-                    // Check if libraries are loaded
-                    // if (typeof window.uuid === 'undefined' || typeof window.ulid === 'undefined') {
-                    //     console.error("UUID or ULID library not loaded correctly at generation time.");
-                    //     this.currentUuid = "Error: Library not loaded";
-                    //     return;
-                    // }
-
                     try { // Wrap generation in try-catch
                         switch(this.selectedType) {
                             case 'v1':
-                                newUuid = window.uuid.v1();
+                                newUuid = uuid.v1();
                                 break;
                             case 'v4':
-                                newUuid = window.uuid.v4();
+                                newUuid = uuid.v4();
                                 break;
                             case 'v7':
-                                newUuid = window.uuid.v7();
+                                newUuid = window.uuidv7();
                                 break;
                             case 'ulid':
                                 // The UMD build typically exposes the function directly
                                 newUuid = window.ulid(); 
                                 break;
                             default:
-                                newUuid = window.uuid.v4();
+                                newUuid = uuid.v4();
                         }
                         this.currentUuid = newUuid;
                         this.addToHistory(newUuid, this.getTypeLabel());
@@ -205,6 +215,8 @@
                 <h2 class="text-xl font-bold mb-4">About GetUUID</h2>
                 <p class="mb-4">A minimalistic tool for generating different types of UUIDs and ULIDs. All generated IDs are stored in your browser's localStorage.</p>
                 <p class="mb-4">This tool supports UUID v1, v3, v4, v5, v7, and ULID formats.</p>
+                <p class="mb-4">History is limited by 50 entries.</p>
+                <p class="mb-4">Source code: <a/ href="https://github.com/abogoyavlensky/getuuid">abogoyavlensky/getuuid<a></p>
                 <button @click="showAbout = false" class="neo-brutal-sm px-4 py-2 bg-primary text-white hover:bg-opacity-90 mt-4">Close</button>
             </div>
         </div>
