@@ -6,7 +6,7 @@
 
 A minimalist web tool for generating various unique identifiers with a modern neo-brutalist UI design.
 
-[Landing](docs/landing.png)
+![Landing](/docs/landing.png)
 
 ## Features
 
