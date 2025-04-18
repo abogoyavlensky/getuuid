@@ -24,12 +24,11 @@ A minimalist web tool for generating various unique identifiers with a modern ne
   - Visual feedback when IDs are copied
   - Responsive design works on desktop and mobile
 
-## Getting Started
+## Development
 
 ### Prerequisites
 
-- Node.js (v18 or later recommended)
-- npm or yarn
+- [mise-en-place](https://mise.jdx.dev/)
 
 ### Installation
 
@@ -41,6 +40,8 @@ A minimalist web tool for generating various unique identifiers with a modern ne
 
 2. Install dependencies:
    ```
+   mise trust
+   mise install
    npm install
    ```
 
@@ -52,7 +53,7 @@ A minimalist web tool for generating various unique identifiers with a modern ne
 
 4. Open `index.html` in your browser
 
-### Development
+### Watch mode
 
 - Watch for JS changes:
   ```
@@ -76,20 +77,6 @@ A minimalist web tool for generating various unique identifiers with a modern ne
 
 - Chrome, Firefox, Safari, Edge (latest versions)
 - Works offline once loaded
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Contributing
-
-Contributions are welcome! Feel free to open an issue or submit a pull request.
-
-1. Fork the repository
-2. Create your feature branch: `git checkout -b feature/my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin feature/my-new-feature`
-5. Submit a pull request
 
 ## Acknowledgments
 
