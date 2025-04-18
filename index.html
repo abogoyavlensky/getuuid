@@ -6,12 +6,143 @@
     <title>GetUUID</title>
     <!-- TailwindCSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- AlpineJS CDN -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- UUID Library -->
-    <script src="https://cdn.jsdelivr.net/npm/uuid@9.0.1/dist/umd/uuid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uuid@11.1.0/dist/cjs-browser/index.min.js"></script>
     <!-- ULID Library -->
     <script src="https://cdn.jsdelivr.net/npm/ulid@2.3.0/dist/index.umd.js"></script>
+    
+    <!-- Alpine Component Definition (moved here, but will be registered later) -->
+    <script type="module">
+      import { v4 as uuidv4, v1 as uuidv1, v7 as uuidv7 } from 'https://cdn.jsdelivr.net/npm/uuid@11.1.0/dist/esm-browser/index.js';
+      import { ulid } from 'https://cdn.jsdelivr.net/npm/ulid@3.0.0/+esm'
+    </script> 
+    <script>
+            console.log(uuidv4());
+            console.log(ulid());
+
+        function uuidGenerator() {
+            return {
+                currentUuid: '',
+                selectedType: 'v4',
+                copied: false,
+                showAbout: false,
+                history: [],
+                uuidTypes: [
+                    { id: 'v4', label: 'UUID v4' },
+                    { id: 'v7', label: 'UUID v7' },
+                    { id: 'v1', label: 'UUID v1' },
+                    { id: 'ulid', label: 'ULID' }
+                ],
+                
+                init() {
+                    // Load history from localStorage
+                    const savedHistory = localStorage.getItem('uuid_history');
+                    if (savedHistory) {
+                        this.history = JSON.parse(savedHistory);
+                    }
+                    // Check libs *again* just before generation
+                    // if (typeof window.uuid !== 'undefined' && typeof window.ulid !== 'undefined') {
+                         this.generateUuid(); // Generate initial UUID here now
+                    // } else {
+                        //  this.currentUuid = "Error: Libraries not ready.";
+                        //  console.error("Libraries not ready during init.");
+                    // }
+                },
+                
+                generateUuid() {
+                    console.log("Generating UUID..."); // Log the function cal
+                    let newUuid = '';
+
+                    // Check if libraries are loaded
+                    // if (typeof window.uuid === 'undefined' || typeof window.ulid === 'undefined') {
+                    //     console.error("UUID or ULID library not loaded correctly at generation time.");
+                    //     this.currentUuid = "Error: Library not loaded";
+                    //     return;
+                    // }
+
+                    try { // Wrap generation in try-catch
+                        switch(this.selectedType) {
+                            case 'v1':
+                                newUuid = window.uuid.v1();
+                                break;
+                            case 'v4':
+                                newUuid = window.uuid.v4();
+                                break;
+                            case 'v7':
+                                newUuid = window.uuid.v7();
+                                break;
+                            case 'ulid':
+                                // The UMD build typically exposes the function directly
+                                newUuid = window.ulid(); 
+                                break;
+                            default:
+                                newUuid = window.uuid.v4();
+                        }
+                        this.currentUuid = newUuid;
+                        this.addToHistory(newUuid, this.getTypeLabel());
+                    } catch (error) {
+                        console.error("Error generating ID:", error);
+                        this.currentUuid = "Error generating ID";
+                    }
+                },
+                
+                selectType(type) {
+                    this.selectedType = type;
+                    this.generateUuid();
+                },
+                
+                getTypeLabel() {
+                    const type = this.uuidTypes.find(t => t.id === this.selectedType);
+                    return type ? type.label : 'UUID v4';
+                },
+                
+                getTypeDescription() {
+                    switch(this.selectedType) {
+                        case 'v1':
+                            return 'Time-based UUID that includes the MAC address of the computer that generated it.';
+                        case 'v4':
+                            return 'Random UUID, the most common format. Provides strong uniqueness guarantees.';
+                        case 'v7':
+                            return 'Time-ordered UUID with improved sortability while maintaining randomness.';
+                        case 'ulid':
+                            return 'Universally Unique Lexicographically Sortable Identifier. Time-based and sortable.';
+                        default:
+                            return 'Random UUID, the most common format. Provides strong uniqueness guarantees.';
+                    }
+                },
+                
+                copyToClipboard(text) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        this.copied = true;
+                        setTimeout(() => {
+                            this.copied = false;
+                        }, 2000);
+                    });
+                },
+                
+                addToHistory(uuid, type) {
+                    // Add to the beginning of the array
+                    this.history.unshift({ uuid, type });
+                    
+                    // Limit history to 50 items
+                    if (this.history.length > 50) {
+                        this.history = this.history.slice(0, 50);
+                    }
+                    
+                    // Save to localStorage
+                    localStorage.setItem('uuid_history', JSON.stringify(this.history));
+                },
+                
+                clearHistory() {
+                    this.history = [];
+                    localStorage.removeItem('uuid_history');
+                }
+            };
+        }
+    </script>
+
+    <!-- AlpineJS CDN (defer removed, will initialize manually later) -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
     <script>
         // Configure Tailwind for neobrutalism style
@@ -59,7 +190,7 @@
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
-    <div x-data="uuidGenerator()" class="container mx-auto px-4 py-8 max-w-3xl">
+    <div x-data="uuidGenerator" class="container mx-auto px-4 py-8 max-w-3xl">
         <header class="flex justify-between items-center mb-8">
             <h1 class="text-3xl font-bold">GetUUID</h1>
             <button @click="showAbout = !showAbout" class="neo-brutal-sm px-4 py-2 bg-white hover:bg-gray-100">About</button>
@@ -144,138 +275,23 @@
             <p>Made with ❤️ by GetUUID</p>
         </footer>
     </div>
-    
+    <!-- Alpine Initialization -->
     <script>
-        function uuidGenerator() {
-            return {
-                currentUuid: '',
-                selectedType: 'v4',
-                copied: false,
-                showAbout: false,
-                history: [],
-                uuidTypes: [
-                    { id: 'v4', label: 'UUID v4' },
-                    { id: 'v7', label: 'UUID v7' },
-                    { id: 'v5', label: 'UUID v5' },
-                    { id: 'v3', label: 'UUID v3' },
-                    { id: 'v1', label: 'UUID v1' },
-                    { id: 'ulid', label: 'ULID' }
-                ],
-                
-                init() {
-                    // Load history from localStorage
-                    const savedHistory = localStorage.getItem('uuid_history');
-                    if (savedHistory) {
-                        this.history = JSON.parse(savedHistory);
-                    }
-                    
-                    // Generate initial UUID
-                    this.generateUuid();
-                },
-                
-                generateUuid() {
-                    let newUuid = '';
-                    const namespace = '1b671a64-40d5-491e-99b0-da01ff1f3341'; // Example namespace for v3/v5
-                    const name = 'example.com'; // Example name for v3/v5
-                    
-                    switch(this.selectedType) {
-                        case 'v1':
-                            newUuid = uuid.v1();
-                            break;
-                        case 'v3':
-                            newUuid = uuid.v3(name, namespace);
-                            break;
-                        case 'v4':
-                            newUuid = uuid.v4();
-                            break;
-                        case 'v5':
-                            newUuid = uuid.v5(name, namespace);
-                            break;
-                        case 'v7':
-                            // UUID v7 is time-based with random component
-                            // Since the uuid library might not support v7 directly,
-                            // we'll use a workaround or fallback to v4 if needed
-                            try {
-                                if (typeof uuid.v7 === 'function') {
-                                    newUuid = uuid.v7();
-                                } else {
-                                    // Fallback to v4 if v7 is not available
-                                    newUuid = uuid.v4();
-                                    console.warn('UUID v7 not supported in this library version, using v4 instead');
-                                }
-                            } catch (e) {
-                                newUuid = uuid.v4();
-                                console.warn('UUID v7 not supported, using v4 instead');
-                            }
-                            break;
-                        case 'ulid':
-                            newUuid = ulid.ulid();
-                            break;
-                        default:
-                            newUuid = uuid.v4();
-                    }
-                    
-                    this.currentUuid = newUuid;
-                    this.addToHistory(newUuid, this.getTypeLabel());
-                },
-                
-                selectType(type) {
-                    this.selectedType = type;
-                    this.generateUuid();
-                },
-                
-                getTypeLabel() {
-                    const type = this.uuidTypes.find(t => t.id === this.selectedType);
-                    return type ? type.label : 'UUID v4';
-                },
-                
-                getTypeDescription() {
-                    switch(this.selectedType) {
-                        case 'v1':
-                            return 'Time-based UUID that includes the MAC address of the computer that generated it.';
-                        case 'v3':
-                            return 'Name-based UUID that uses MD5 hashing. Deterministic output for the same inputs.';
-                        case 'v4':
-                            return 'Random UUID, the most common format. Provides strong uniqueness guarantees.';
-                        case 'v5':
-                            return 'Name-based UUID that uses SHA-1 hashing. More secure than v3 but still deterministic.';
-                        case 'v7':
-                            return 'Time-ordered UUID with improved sortability while maintaining randomness.';
-                        case 'ulid':
-                            return 'Universally Unique Lexicographically Sortable Identifier. Time-based and sortable.';
-                        default:
-                            return 'Random UUID, the most common format. Provides strong uniqueness guarantees.';
-                    }
-                },
-                
-                copyToClipboard(text) {
-                    navigator.clipboard.writeText(text).then(() => {
-                        this.copied = true;
-                        setTimeout(() => {
-                            this.copied = false;
-                        }, 2000);
-                    });
-                },
-                
-                addToHistory(uuid, type) {
-                    // Add to the beginning of the array
-                    this.history.unshift({ uuid, type });
-                    
-                    // Limit history to 50 items
-                    if (this.history.length > 50) {
-                        this.history = this.history.slice(0, 50);
-                    }
-                    
-                    // Save to localStorage
-                    localStorage.setItem('uuid_history', JSON.stringify(this.history));
-                },
-                
-                clearHistory() {
-                    this.history = [];
-                    localStorage.removeItem('uuid_history');
+        document.addEventListener('DOMContentLoaded', () => {
+            document.addEventListener('alpine:init', () => {
+            // Check if libraries are loaded before defining component
+            if (typeof window.uuid !== 'undefined' && typeof window.ulid !== 'undefined') {
+                Alpine.data('uuidGenerator', uuidGenerator); // Register component using the function defined earlier
+            } else {
+                console.error("Failed to initialize Alpine component: UUID or ULID library not loaded.");
+                // Optionally display an error message to the user on the page
+                // Find a way to update the UI safely if Alpine didn't initialize the component
+                const uuidDisplay = document.querySelector('[x-data="uuidGenerator"] span[x-text="currentUuid"]');
+                if (uuidDisplay) {
+                    uuidDisplay.textContent = 'Error: Required libraries failed to load.';
                 }
-            };
-        }
+            }});
+        });
     </script>
 </body>
 </html>
