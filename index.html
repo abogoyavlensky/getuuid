@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <title>GetUUID - Generate UUIDs, ULIDs and Nano IDs Online</title>
     <meta name="description"
           content="Free online tool to generate various types of unique identifiers including UUID v1, v4, v7, ULID, and Nano ID with one-click copy and history tracking.">
@@ -31,7 +31,7 @@
 
     <!-- Favicon -->
     <link rel="icon" href="public/favicon.svg?v=4">
-    <link href="public/output.css?v=4" rel="stylesheet" type="text/css">
+    <link href="public/output.css?v=5" rel="stylesheet" type="text/css">
     <style>
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -124,7 +124,7 @@
                             </svg>
                         </button>
                         <div @click="copyToClipboard(currentUuid, 'main')"
-                             class="font-mono text-lg md:text-xl bg-gray-100 p-3 rounded-md cursor-pointer overflow-x-auto whitespace-nowrap max-w-full w-[42ch] text-center"
+                                             class="font-mono text-lg md:text-xl bg-gray-100 p-3 rounded-md cursor-pointer overflow-x-auto whitespace-nowrap max-w-full w-full md:w-[42ch] text-center"
                              title="Click to copy">
                             <span x-text="currentUuid"></span>
                         </div>
@@ -188,11 +188,11 @@
                             </button>
                             <span
                                     @click="copyToClipboard(item.uuid, 'history-text-' + index)"
-                                    class="font-mono text-sm truncate max-w-xs cursor-pointer px-2 py-1 rounded"
+                                    class="font-mono text-sm overflow-x-auto whitespace-nowrap max-w-xs cursor-pointer px-2 py-1 rounded"
                                     title="Click to copy"
                                     x-text="item.uuid"></span>
                         </div>
-                        <span class="text-xs bg-gray-200 px-2 py-1 rounded whitespace-nowrap"
+                        <span class="text-xs bg-gray-200 px-2 py-1 rounded whitespace-nowrap ml-1"
                               x-text="item.type"></span>
                     </div>
                 </div>
@@ -204,7 +204,7 @@
     </div>
     <div class="py-2"></div> <!-- Bottom padding -->
 </div>
-<script src="public/output.js?v=4"></script>
+<script src="public/output.js?v=5"></script>
 <script>
     // Only load analytics if not on localhost
     if (window.location.hostname.includes('getuuid.top')) {
