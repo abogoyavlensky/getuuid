@@ -6,7 +6,7 @@
 
 A minimalist web tool for generating various unique identifiers with history tracking and modern, user-friendly design.
 
-![Landing](/docs/landing.png)
+![Landing](/preview/landing.png)
 
 ## Features
 

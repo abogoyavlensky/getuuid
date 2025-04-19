@@ -6,8 +6,8 @@
     "uuid": "^11.1.0"
   },
   "scripts": {
-    "watch": "parcel index.html",
-    "build": "parcel build index.html"
+    "watch": "parcel --dist-dir docs index.html",
+    "build": "parcel build --dist-dir docs index.html"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.4",
