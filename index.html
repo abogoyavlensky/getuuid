@@ -93,7 +93,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
                 </button>
-                <div @click="copyToClipboard(currentUuid, 'main')" class="font-mono text-lg md:text-xl bg-gray-100 p-3 rounded-md cursor-pointer overflow-x-auto whitespace-nowrap max-w-full" title="Click to copy">
+                <div @click="copyToClipboard(currentUuid, 'main')" class="font-mono text-lg md:text-xl bg-gray-100 p-3 rounded-md cursor-pointer overflow-x-auto whitespace-nowrap max-w-full w-[42ch] text-center" title="Click to copy">
                     <span x-text="currentUuid"></span>
                 </div>
                 <button @click="generateUuid" class="neo-brutal-sm px-4 py-2 bg-primary text-white hover:bg-opacity-90">Generate</button>
