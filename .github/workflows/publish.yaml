@@ -28,7 +28,6 @@ jobs:
         id: build
         run: |
           npm install --ignore-scripts=false
-#          npm dedupe
           npm install @parcel/watcher
           npx parcel build index.html
 
