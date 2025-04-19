@@ -27,8 +27,9 @@ jobs:
       - name: Build static files
         id: build
         run: |
-          npm install --ignore-scripts=false
-          npm install @parcel/watcher
+          npm install
+          npm install -O @parcel/watcher-linux-x64-glibc
+          npm dedupe
           npx parcel build index.html
 
       - name: Upload static files as artifact
