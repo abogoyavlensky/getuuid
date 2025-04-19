@@ -52,11 +52,13 @@ A minimalist web tool for generating various unique identifiers with history tra
    npm run watch
    ```
 
-#### Build project for production
+#### Deploy
 
 ```
 npm run build
 ```
+
+And commit to main branch.
 
 ## Technology Stack
 

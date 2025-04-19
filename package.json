@@ -6,7 +6,7 @@
     "uuid": "^11.1.0"
   },
   "scripts": {
-    "watch": "parcel --dist-dir docs index.html",
+    "watch": "parcel --dist-dir dist index.html",
     "build": "parcel build --dist-dir docs index.html"
   },
   "devDependencies": {
