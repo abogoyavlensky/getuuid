@@ -27,7 +27,7 @@ jobs:
         id: build
         run: |
           npm install
-          npm run build
+          npx parcel build index.html
 
       - name: Upload static files as artifact
         id: deployment
