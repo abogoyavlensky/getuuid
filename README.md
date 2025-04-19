@@ -49,16 +49,23 @@ A minimalist web tool for generating various unique identifiers with history tra
 
 3. Build project in watch mode and run server:
    ```
-   npm run watch
+   task dev
    ```
+
+Application is started at `http://localhost:8000`.
 
 #### Deploy
 
 ```
-npm run build
+task build
 ```
 
-And commit to main branch.
+And commit to `master` branch.
+Application will be served by GitHub Pages from the root directory of the repository in `master` branch.
+
+##### TODO
+
+- [] Implement cache busting in proudction build
 
 ## Technology Stack
 

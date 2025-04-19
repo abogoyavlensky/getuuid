@@ -6,13 +6,14 @@
     "uuid": "^11.1.0"
   },
   "scripts": {
-    "watch": "parcel --dist-dir dist index.html",
-    "build": "parcel build --dist-dir docs index.html"
+    "build-js": "esbuild public/input.js --bundle --outfile=public/output.js --minify",
+    "watch-js": "esbuild --watch public/input.js --bundle --outfile=public/output.js --minify",
+    "build-css": "tailwindcss -i ./public/input.css -o ./public/output.css --minify",
+    "watch-css": "tailwindcss -i ./public/input.css -o ./public/output.css --watch --minify"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.4",
-    "parcel": "^2.14.4",
-    "svgo": "^3.3.2",
-    "tailwindcss": "^4.1.4"
+    "tailwindcss": "^4.1.4",
+    "@tailwindcss/cli": "^4.1.4",
+    "esbuild": "0.25.2"
   }
 }
