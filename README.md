@@ -49,22 +49,19 @@ A minimalist web tool for generating various unique identifiers with history tra
 
 3. Build the project:
    ```
-   npm run build-css
-   npm run build-js
+   task build
    ```
 
-4. Open `index.html` in your browser
+4. Run the server
+   ```
+   task server
+   ```
 
 ### Watch mode
 
-- Watch for JS changes:
+- Watch for JS and CSS changes:
   ```
-  npm run watch-js
-  ```
-
-- Watch for CSS changes:
-  ```
-  npm run watch-css
+  task watch
   ```
 
 ## Technology Stack

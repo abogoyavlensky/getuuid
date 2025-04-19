@@ -1,0 +1,39 @@
+version: '3'
+
+tasks:
+  build-css:
+    desc: Build css for prod
+    internal: true
+    cmds:
+      - npm run build-css
+
+  watch-css:
+    desc: Watch css for dev
+    internal: true
+    cmds:
+      - npm run watch-css
+
+  build-js:
+    desc: Build js for prod
+    internal: true
+    cmds:
+      - npm run build-js
+
+  watch-js:
+    desc: Watch js for dev
+    internal: true
+    cmds:
+      - npm run watch-js
+
+  build:
+    desc: Build js and css for prod
+    deps: [build-css, build-js]
+
+  watch:
+    desc: Build js and css for dev in watch
+    deps: [watch-css, watch-js]
+
+  server:
+    desc: Start the server
+    cmds:
+      - python -m http.server 8000
