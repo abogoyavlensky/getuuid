@@ -14,8 +14,5 @@
     "parcel": "^2.14.4",
     "svgo": "^3.3.2",
     "tailwindcss": "^4.1.4"
-  },
-  "optionalDependencies": {
-    "@parcel/watcher-linux-x64-glibc": "^2.5.1"
   }
 }
