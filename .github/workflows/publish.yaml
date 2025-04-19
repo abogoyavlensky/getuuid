@@ -28,7 +28,7 @@ jobs:
         id: build
         run: |
           npm install --ignore-scripts=false
-          npm rebuild @parcel/watcher
+          npm dedupe
           npx parcel build index.html
 
       - name: Upload static files as artifact
