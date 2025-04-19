@@ -18,7 +18,7 @@
           content="GetUUID - Generate UUIDs, ULIDs and Nano IDs Online">
     <meta property="og:description"
           content="Free online tool to generate various types of unique identifiers including UUID v1, v4, v7, ULID, and Nano ID with one-click copy and history tracking.">
-    <meta property="og:image" content="public/og-image.png?v=1">
+    <meta property="og:image" content="public/og-image.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
@@ -27,11 +27,11 @@
           content="GetUUID - Generate UUIDs, ULIDs and Nano IDs Online">
     <meta property="twitter:description"
           content="Free online tool to generate various types of unique identifiers including UUID v1, v4, v7, ULID, and Nano ID with one-click copy and history tracking.">
-    <meta property="twitter:image" content="public/og-image.png?v=1">
+    <meta property="twitter:image" content="public/og-image.png">
 
     <!-- Favicon -->
-    <link rel="icon" href="public/favicon.svg?v=1">
-    <link href="public/output.css?v=3" rel="stylesheet">
+    <link rel="icon" href="public/favicon.svg">
+    <link href="public/input.css" rel="stylesheet" type="text/css">
     <style>
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -166,7 +166,7 @@
                     <div class="flex items-center justify-between p-2">
                         <div class="flex items-center space-x-3 overflow-x-auto whitespace-nowrap max-w-full w-[42ch]">
                             <button @click="copyToClipboard(item.uuid, 'history-' + index)"
-                                    class="neo-brutal-sm p-1 bg-white hover:bg-gray-100 cursor-pointer"
+                                    class="neo-brutal-sm p-1 m-2 bg-white hover:bg-gray-100 cursor-pointer"
                                     title="Copy to clipboard">
                                 <svg x-show="!isButtonCopied('history-' + index) && !isButtonCopied('history-text-' + index)"
                                      xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
@@ -202,7 +202,7 @@
     </div>
     <div class="py-2"></div> <!-- Bottom padding -->
 </div>
-<script src="public/output.js?v=3"></script>
+<script type="module" src="public/input.js"></script>
 <script>
     // Only load analytics if not on localhost
     if (window.location.hostname.includes('getuuid.top')) {

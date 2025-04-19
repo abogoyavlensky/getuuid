@@ -49,13 +49,13 @@ A minimalist web tool for generating various unique identifiers with history tra
 
 3. Build project in watch mode and run server:
    ```
-   task up
+   npm run watch
    ```
 
 #### Build project for production
 
 ```
-task build
+npm run build
 ```
 
 ## Technology Stack
