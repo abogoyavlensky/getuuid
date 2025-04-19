@@ -47,22 +47,16 @@ A minimalist web tool for generating various unique identifiers with history tra
    npm install
    ```
 
-3. Build the project:
+3. Build project in watch mode and run server:
    ```
-   task build
-   ```
-
-4. Run the server
-   ```
-   task server
+   task up
    ```
 
-### Watch mode
+#### Build project for production
 
-- Watch for JS and CSS changes:
-  ```
-  task watch
-  ```
+```
+task build
+```
 
 ## Technology Stack
 
