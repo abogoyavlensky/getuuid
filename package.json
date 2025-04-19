@@ -9,9 +9,9 @@
   },
   "scripts": {
     "build-js": "esbuild public/input.js --bundle --outfile=public/output.js --minify",
-    "watch-js": "esbuild --watch public/input.js --bundle --outfile=public/output.js",
+    "watch-js": "esbuild --watch public/input.js --bundle --outfile=public/output.js --minify",
     "build-css": "tailwindcss -i ./public/input.css -o ./public/output.css --minify",
-    "watch-css": "tailwindcss -i ./public/input.css -o ./public/output.css --watch"
+    "watch-css": "tailwindcss -i ./public/input.css -o ./public/output.css --watch --minify"
   },
   "devDependencies": {
     "esbuild": "0.25.2"
