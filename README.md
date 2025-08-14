@@ -65,7 +65,7 @@ Application will be served by GitHub Pages from the root directory of the reposi
 
 ##### TODO
 
-- [] Implement cache busting in proudction build
+- [] Implement cache busting in production build
 
 ## Technology Stack
 

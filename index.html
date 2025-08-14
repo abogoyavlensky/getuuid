@@ -67,7 +67,12 @@
 <div x-data="uuidGenerator"
      class="container mx-auto px-4 py-8 max-w-3xl flex flex-col min-h-screen">
     <header class="flex justify-between items-center mb-6">
-        <h1 class="text-5xl font-bold">Get<span class="text-primary">UUID</span></h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-5xl font-bold">Get<span class="text-primary">UUID</span></h1>
+            <a href="https://www.uneed.best/tool/getuuid" target="_blank" data-umami-event="uneed-badge">
+                <img src="https://www.uneed.best/POTD3.png" style="width: 140px;" alt="Uneed POTD3 Badge" />
+            </a>
+        </div>
         <button @click="showAbout = !showAbout"
                 data-umami-event="about"
                 class="neo-brutal-sm px-4 py-2 bg-white hover:bg-gray-100 cursor-pointer">
@@ -79,6 +84,7 @@
         <h2 class="text-2xl text-gray-700">Effortless UUID, ULID & NanoID
             generation</h2>
     </div>
+
 
     <!-- About Modal -->
     <div x-cloak x-show="showAbout"
