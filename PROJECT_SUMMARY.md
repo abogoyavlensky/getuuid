@@ -3,7 +3,7 @@
 ## Overview
 GetUUID is a minimalist web application for generating various types of unique identifiers. It's a single-page application built with modern web technologies, featuring a neo-brutalist design aesthetic and client-side functionality for generating UUIDs, ULIDs, and Nano IDs with history tracking.
 
-**Live Site:** https://getuuid.top/  
+**Live Site:** https://getuuid.bogoyavlensky.com/  
 **Repository:** https://github.com/abogoyavlensky/getuuid
 
 ## Key Features
